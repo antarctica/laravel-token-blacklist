@@ -1,0 +1,39 @@
+{
+    "name": "antarctica/laravel-token-blacklist",
+    "description": "Enables API tokens to be marked as invalid until natural expiry within Laravel.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Felix Fennell",
+            "email": "felnne@bas.ac.uk"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "illuminate/support": "~4.0",
+        "antarctica/laravel-base-exceptions": "dev-develop",
+        "antarctica/laravel-base-repositories": "dev-develop",
+        "indatus/dispatcher": "1.4.*@dev",
+        "antarctica/laravel-token-auth": "dev-develop"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "ssh://git@stash.ceh.ac.uk:7999/~felnne/laravel-base-exceptions.git"
+        },
+        {
+            "type": "vcs",
+            "url": "ssh://git@stash.ceh.ac.uk:7999/~felnne/laravel-base-repositories.git"
+        },
+        {
+            "type": "vcs",
+            "url": "ssh://git@stash.ceh.ac.uk:7999/~felnne/laravel-token-auth.git"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Antarctica\\LaravelTokenBlacklist\\": "src"
+        }
+    }
+}
