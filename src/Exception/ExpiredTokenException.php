@@ -2,7 +2,7 @@
 
 namespace Antarctica\LaravelTokenBlacklist\Exception;
 
-class ExpiredTokenException extends \Lions\Exception\Token\ExpiredTokenException { // TODO: '\Lions\Exception\Token\ExpiredTokenException' Circular dependency(!)
+class ExpiredTokenException extends \Antarctica\LaravelTokenAuth\Exception\Token\ExpiredTokenException {
 
     protected $statusCode = 401;
 

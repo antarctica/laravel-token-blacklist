@@ -12,6 +12,7 @@
     "require": {
         "php": ">=5.3.3",
         "illuminate/support": "~4.0",
+        "illuminate/database": "~4.0",
         "antarctica/laravel-base-exceptions": "dev-develop",
         "antarctica/laravel-base-repositories": "dev-develop",
         "indatus/dispatcher": "1.4.*@dev",

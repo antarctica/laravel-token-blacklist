@@ -3,18 +3,17 @@
 namespace Antarctica\LaravelTokenBlacklist\Repository;
 
 use Antarctica\LaravelBaseRepositories\Repository\BaseRepositoryEloquent;
+
 use BlacklistedToken;  // TODO: Include model somehow
+
 use Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
-
-use Lions\Exception\Token\BlacklistedTokenException;  // TODO: Circular dependency(!)
-use Lions\Exception\Token\ExpiredTokenException;  // TODO: Circular dependency(!)
-
+use Antarctica\LaravelTokenAuth\Exception\Token\BlacklistedTokenException;
+use Antarctica\LaravelTokenBlacklist\Exception\ExpiredTokenException;
 use Antarctica\LaravelTokenBlacklist\Exception\BlacklistDuplicate;
 use Antarctica\LaravelTokenBlacklist\Exception\BlacklistFault;
-
-use Lions\Service\Token\TokenServiceInterface;  // TODO: Circular dependency(!)
+use Antarctica\LaravelTokenAuth\Service\Token\TokenServiceInterface;
 
 class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements TokenBlacklistRepositoryInterface {
 
@@ -39,10 +38,10 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
 
     /**
      * @param array $attributes
-     * @return array
      * @throws BlacklistDuplicate
      * @throws BlacklistFault
-     * @throws \Lions\Exception\TokenBlacklist\ExpiredTokenException
+     * @throws \Antarctica\LaravelTokenAuth\Exception\Token\ExpiredTokenException
+     * @return array
      */
     public function create(array $attributes)
     {
@@ -64,7 +63,7 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
         }
         catch (ExpiredTokenException $exception)
         {
-            throw new \Lions\Exception\TokenBlacklist\ExpiredTokenException();
+            throw new \Antarctica\LaravelTokenAuth\Exception\Token\ExpiredTokenException();
         }
         catch (ModelNotFoundException $exception)
         {
