@@ -11,28 +11,28 @@ class LaravelTokenBlacklistServiceProvider extends ServiceProvider {
 	 */
 	protected $defer = false;
 
-	/**
-	 * Bootstrap the application events.
-	 *
-	 * @return void
-	 */
-	public function boot()
-	{
-		$this->package('antarctica/laravel-token-blacklist');
-	}
+    /**
+     * Bootstrap the application events.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->package('antarctica/laravel-token-blacklist', null, __DIR__.'/../../../..');
+    }
 
-	/**
-	 * Register the service provider.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
-        $this->app->bind('Antarctica\LaravelTokenBlacklist\Repository\TokenBlacklistRepositoryInterface', function ($app)
-        {
-            return $app['antarctica.laravel-token-blacklist.repository'];
-        });
-	}
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->bind(
+            'Antarctica\LaravelTokenBlacklist\Repository\TokenBlacklistRepositoryInterface',
+            $this->app['config']["antarctica/laravel-token-blacklist::repository"]
+        );
+    }
 
 	/**
 	 * Get the services provided by the provider.
