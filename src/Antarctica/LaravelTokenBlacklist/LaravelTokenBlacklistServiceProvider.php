@@ -28,7 +28,7 @@ class LaravelTokenBlacklistServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-        $this->app->bind('Antarctica\LaravelTokenBlacklist\Repository\TokenBlacklistRepositoryInterface', 'Antarctica\LaravelTokenBlacklist\Repository\TokenBlacklistRepositoryEloquent');
+        $this->app->bind('Antarctica\LaravelTokenBlacklist\Repository\TokenBlacklistRepositoryInterface', Config::get('package::repository'));
 	}
 
 	/**
