@@ -28,7 +28,10 @@ class LaravelTokenBlacklistServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-        $this->app->bind('Antarctica\LaravelTokenBlacklist\Repository\TokenBlacklistRepositoryInterface', Config::get('package::repository'));
+        $this->app->bind('Tymon\JWTAuth\Providers\ProviderInterface', function ($app)
+        {
+            return $app['antarctica.laravel-token-blacklist.repository'];
+        });
 	}
 
 	/**
