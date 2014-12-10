@@ -33,7 +33,7 @@
     ],
     "autoload": {
         "classmap": [
-            "src/database/migrations",
+            "src/migrations",
             "src/models"
         ],
         "psr-0": {
