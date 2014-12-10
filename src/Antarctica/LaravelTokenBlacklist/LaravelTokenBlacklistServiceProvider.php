@@ -1,5 +1,6 @@
 <?php namespace Antarctica\LaravelTokenBlacklist;
 
+use Config;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelTokenBlacklistServiceProvider extends ServiceProvider {
@@ -28,9 +29,12 @@ class LaravelTokenBlacklistServiceProvider extends ServiceProvider {
      */
     public function register()
     {
+        // Load package config to allow use of values
+        Config::package('antarctica/laravel-token-blacklist', __DIR__.'/../../config');
+
         $this->app->bind(
             'Antarctica\LaravelTokenBlacklist\Repository\TokenBlacklistRepositoryInterface',
-            $this->app['config']["antarctica/laravel-token-blacklist::repository"]
+            Config::get('laravel-token-blacklist::repository')
         );
     }
 
