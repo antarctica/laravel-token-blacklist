@@ -14,6 +14,16 @@ Require this package in your `composer.json` file:
         }
     }
 
+Note: Until this package is released publicly, or an internal package server is created you will need to help
+Composer find this package by adding the following configuration:
+
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "ssh://git@stash.ceh.ac.uk:7999/~felnne/laravel-token-blacklist.git"
+        }
+    ],
+
 Register the service provider in the `providers` array of your `app/config/app.php` file:
 
     'Antarctica\LaravelTokenBlacklist\LaravelTokenBlacklistServiceProvider',
