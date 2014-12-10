@@ -19,7 +19,11 @@ class LaravelTokenBlacklistServiceProvider extends ServiceProvider {
      */
     public function boot()
     {
+        // Load package resources
         $this->package('antarctica/laravel-token-blacklist', null, __DIR__.'/../../../..');
+
+        // Register package commands
+        $this->commands('Antarctica\LaravelTokenBlacklist\Command\TokenBlacklist\DeleteExpiredBlacklistedTokens');
     }
 
     /**
