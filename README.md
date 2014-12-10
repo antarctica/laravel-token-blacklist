@@ -34,3 +34,5 @@ To set an alternative implementation, first publish this package's config:
     php artisan config:publish antarctica/laravel-token-blacklist
 
 Then edit the `repository` key.
+
+TODO: Describe scheduled task + general information about package commands.
