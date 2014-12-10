@@ -25,12 +25,12 @@ The default eloquent model and database migration to create its respective table
 
 To run this migration run:
 
-    php artisan migrate --package="antarctica\laravel-token-blacklist"
+    php artisan migrate --package="antarctica/laravel-token-blacklist"
 
 If you wish to use an alternative repository implementation you can, providing it implements the `TokenBlacklistRepositoryInterface` interface.
 
 To set an alternative implementation, first publish this package's config:
 
-    php artisan config:publish antarctica\laravel-token-blacklist
+    php artisan config:publish antarctica/laravel-token-blacklist
 
 Then edit the `repository` key.
