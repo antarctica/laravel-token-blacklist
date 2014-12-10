@@ -15,7 +15,7 @@ class DeleteExpiredBlacklistedTokens extends ScheduledCommand {
 	 *
 	 * @var string
 	 */
-	protected $name = 'lions:delete-expired-blacklisted-tokens';
+	protected $name = 'auth-tokens:delete-expired-blacklisted-tokens';
 
 	/**
 	 * The console command description.
