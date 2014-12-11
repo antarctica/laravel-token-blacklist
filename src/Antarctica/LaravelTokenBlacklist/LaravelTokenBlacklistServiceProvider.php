@@ -1,6 +1,6 @@
 <?php namespace Antarctica\LaravelTokenBlacklist;
 
-use Config;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 class LaravelTokenBlacklistServiceProvider extends ServiceProvider {

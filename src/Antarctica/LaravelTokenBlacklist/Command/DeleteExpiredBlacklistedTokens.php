@@ -2,11 +2,11 @@
 
 namespace Antarctica\LaravelTokenBlacklist\Command;
 
+use Illuminate\Support\Facades\Log;
 use Indatus\Dispatcher\Scheduling\ScheduledCommand;
 use Indatus\Dispatcher\Scheduling\Schedulable;
 use Indatus\Dispatcher\Drivers\Cron\Scheduler;
 use Antarctica\LaravelTokenBlacklist\Repository\TokenBlacklistRepositoryInterface;
-use Log;
 
 class DeleteExpiredBlacklistedTokens extends ScheduledCommand {
 
