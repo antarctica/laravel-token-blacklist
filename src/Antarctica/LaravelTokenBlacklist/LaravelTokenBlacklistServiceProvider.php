@@ -36,6 +36,10 @@ class LaravelTokenBlacklistServiceProvider extends ServiceProvider {
         // Load package config to allow use of values
         Config::package('antarctica/laravel-token-blacklist', __DIR__.'/../../config');
 
+        // Register package dependencies' service providers and aliases (so the user doesn't have to in app/config/app.php)
+        $this->app->register('Indatus\Dispatcher\ServiceProvider');
+
+        // Register package interfaces with their corresponding implementations
         $this->app->bind(
             'Antarctica\LaravelTokenBlacklist\Repository\TokenBlacklistRepositoryInterface',
             Config::get('laravel-token-blacklist::repository')
