@@ -17,6 +17,9 @@
         "indatus/dispatcher": "1.4.*@dev",
         "antarctica/laravel-token-auth": "dev-develop"
     },
+    "require-dev": {
+        "illuminate/database": "~4.0"
+    },
     "repositories": [
         {
             "type": "vcs",
@@ -40,5 +43,5 @@
             "Antarctica\\LaravelTokenBlacklist\\": "src/"
         }
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "dev"
 }
