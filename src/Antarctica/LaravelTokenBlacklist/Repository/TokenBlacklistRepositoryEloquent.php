@@ -4,7 +4,7 @@ namespace Antarctica\LaravelTokenBlacklist\Repository;
 
 use Antarctica\LaravelBaseRepositories\Repository\BaseRepositoryEloquent;
 
-use BlacklistedToken;  // TODO: Include model somehow
+use BlacklistedToken;
 
 use Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
