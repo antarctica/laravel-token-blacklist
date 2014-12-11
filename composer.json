@@ -12,9 +12,9 @@
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "4.2.*",
+        "indatus/dispatcher": "1.4.*@dev",
         "antarctica/laravel-base-exceptions": "dev-develop",
         "antarctica/laravel-base-repositories": "dev-develop",
-        "indatus/dispatcher": "1.4.*@dev",
         "antarctica/laravel-token-auth": "dev-develop"
     },
     "require-dev": {
