@@ -59,17 +59,22 @@ class DeleteExpiredBlacklistedTokens extends ScheduledCommand {
         $expiredBlacklistedTokens = $this->Blacklist->findAllExpired();
         $expiredBlacklistedTokensCount = count($expiredBlacklistedTokens);
 
-        $this->Blacklist->deleteAllExpired();
-
-        // The number of expired blacklisted tokens should now be 0
-        $expiredBlacklistedTokensCountCheck = count($this->Blacklist->findAllExpired());
-
-        if ($expiredBlacklistedTokensCountCheck === 0)
+        if ($expiredBlacklistedTokensCount > 0)
         {
-            Log::info('Successfully deleted ' . $expiredBlacklistedTokensCount . ' expired blacklisted authentication tokens');
+            $this->Blacklist->deleteAllExpired();
+
+            // The number of expired blacklisted tokens should now be 0
+            $expiredBlacklistedTokensCountCheck = count($this->Blacklist->findAllExpired());
+
+            if ($expiredBlacklistedTokensCountCheck === 0)
+            {
+                Log::info('Successfully deleted ' . $expiredBlacklistedTokensCount . ' expired blacklisted authentication tokens');
+            }
+            else {
+                Log::warning('Something went wrong deleting expired blacklisted authentication tokens, ' . $expiredBlacklistedTokensCount . ' should have been removed, ' . $expiredBlacklistedTokensCountCheck . ' still remain.');
+            }
         }
-        else {
-            Log::warning('Something went wrong deleting expired blacklisted authentication tokens, ' . $expiredBlacklistedTokensCount . ' should have been removed, ' . $expiredBlacklistedTokensCountCheck . ' still remain.');
-        }
+
+        Log::info('No blacklisted blacklisted authentication tokens needed cleaning up as none had deleted expired');
 	}
 }
