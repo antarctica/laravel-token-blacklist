@@ -24,6 +24,8 @@ Composer find this package by adding the following configuration:
         }
     ],
 
+Note: [BASWEB-114](https://jira.ceh.ac.uk/browse/BASWEB-114) - If using the antarctica/laravel ansible role to provision the underlying infrastructure on which the app using this package is required, it is necessary to require this package in the app `composer.json` file. Composer will resolve the package requirements in exactly the same way, this change is needed so ansible is aware this package is used and OS support should be provided for its use.
+
 Register the service provider in the `providers` array of your `app/config/app.php` file:
 
     'Antarctica\LaravelTokenBlacklist\LaravelTokenBlacklistServiceProvider',
