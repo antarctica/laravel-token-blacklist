@@ -13,27 +13,13 @@
         "php": ">=5.4.0",
         "illuminate/support": "4.2.*",
         "indatus/dispatcher": "1.4.*@dev",
-        "antarctica/laravel-base-exceptions": "dev-develop",
-        "antarctica/laravel-base-repositories": "dev-develop",
-        "antarctica/laravel-token-auth": "dev-develop"
+        "antarctica/laravel-base-exceptions": "0.1",
+        "antarctica/laravel-base-repositories": "0.1",
+        "antarctica/laravel-token-auth": "0.1"
     },
     "require-dev": {
         "illuminate/database": "~4.0"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "ssh://git@stash.ceh.ac.uk:7999/basweb/laravel-base-exceptions.git"
-        },
-        {
-            "type": "vcs",
-            "url": "ssh://git@stash.ceh.ac.uk:7999/basweb/laravel-base-repositories.git"
-        },
-        {
-            "type": "vcs",
-            "url": "ssh://git@stash.ceh.ac.uk:7999/basweb/laravel-token-auth.git"
-        }
-    ],
     "autoload": {
         "classmap": [
             "src/migrations",
