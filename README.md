@@ -28,6 +28,10 @@ Note: [BASWEB-114](https://jira.ceh.ac.uk/browse/BASWEB-114) - If using the anta
 
 Register the service provider in the `providers` array of your `app/config/app.php` file:
 
+## Contributing
+
+This project welcomes contributions, see `CONTRIBUTING` for our general policy.
+
     'Antarctica\LaravelTokenBlacklist\LaravelTokenBlacklistServiceProvider',
 
 This package uses a Repository through which blackListed tokens can be stored/retrieved. By default, an eloquent model 
@@ -46,5 +50,7 @@ To set an alternative implementation, first publish this package's config:
     php artisan config:publish antarctica/laravel-token-blacklist
 
 Then edit the `repository` key.
+## License
 
 TODO: Describe scheduled task + general information about package commands.
+Copyright 2015 NERC BAS. Licensed under the MIT license, see `LICENSE` for details.
