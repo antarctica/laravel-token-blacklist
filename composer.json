@@ -12,9 +12,9 @@
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "4.2.*",
-        "indatus/dispatcher": "1.4.*@dev",
-        "antarctica/laravel-base-exceptions": "0.1",
-        "antarctica/laravel-base-repositories": "0.1",
+        "indatus/dispatcher": "1.4.*",
+        "antarctica/laravel-base-exceptions": "0.1.*",
+        "antarctica/laravel-base-repositories": "0.1.*",
         "antarctica/laravel-token-auth": "0.1"
     },
     "require-dev": {
@@ -28,6 +28,5 @@
         "psr-0": {
             "Antarctica\\LaravelTokenBlacklist\\": "src/"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
