@@ -86,6 +86,10 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
     }
 
     /**
+     * Check if a given token is considered blacklisted
+     *
+     * TODO: Use export() method
+     *
      * @param $token
      * @return bool
      * @throws BlacklistedTokenException
@@ -106,6 +110,10 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
     }
 
     /**
+     * Try to find a blacklisted token entity by its associated token
+     *
+     * TODO: Use export() method
+     *
      * @param string $token
      * @return array
      */
@@ -122,6 +130,10 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
     }
 
     /**
+     * Find all blacklisted tokens that have naturally expired, and so no longer need to be tracked
+     *
+     * TODO: Use export() method
+     *
      * Returns any blacklisted tokens that will have expired naturally and so no longer need to be considered.
      *
      * @return array
@@ -134,7 +146,7 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
     }
 
     /**
-     * Deletes any blacklisted tokens that will have expired naturally and so no longer need to be considered.
+     * Delete all blacklisted token entities where the associated token has naturally expired, and so no longer needs to be tracked
      */
     public function deleteAllExpired()
     {
