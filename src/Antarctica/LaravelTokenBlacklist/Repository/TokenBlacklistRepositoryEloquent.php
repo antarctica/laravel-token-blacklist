@@ -82,9 +82,6 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
         {
             throw new BlacklistFault('Unable to blacklist token.');
         }
-
-        // Return value is not used in this case
-        return [];
     }
 
     /**
