@@ -3,6 +3,7 @@
 namespace Antarctica\LaravelTokenBlacklist\Repository;
 
 use Antarctica\LaravelBaseRepositories\Repository\BaseRepositoryEloquent;
+use Antarctica\LaravelBaseExceptions\Exception\InvalidArgumentTypeException;
 
 use BlacklistedToken;
 
@@ -53,7 +54,8 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
             'expiry' => Carbon::createFromTimeStamp($this->Token->getExpiry($token))
         ];
 
-        try {
+        try
+        {
             // This will raise an expired token exception if the token has expired (no point blacklisting something that won't work anyway)
             $this->Token->getExpiry($token);
 
@@ -70,18 +72,23 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
             // In this case we *want* this exception to the thrown, but to ignore its usual significance and carry on.
         }
 
-        try {
-            // Call to standard (parent) create method
-            parent::create($blacklistedToken);
-        } catch (QueryException $exception) {
+        try
+        {
+            $result = $this->model->create($blacklistedToken);
+
+            return $this->export($result);
+        }
+        catch (QueryException $exception)
+        {
             throw new BlacklistFault('Unable to blacklist token.');
         }
-
-        // Return value is not used in this case
-        return [];
     }
 
     /**
+     * Check if a given token is considered blacklisted
+     *
+     * TODO: Use export() method
+     *
      * @param $token
      * @return bool
      * @throws BlacklistedTokenException
@@ -102,6 +109,10 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
     }
 
     /**
+     * Try to find a blacklisted token entity by its associated token
+     *
+     * TODO: Use export() method
+     *
      * @param string $token
      * @return array
      */
@@ -118,6 +129,10 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
     }
 
     /**
+     * Find all blacklisted tokens that have naturally expired, and so no longer need to be tracked
+     *
+     * TODO: Use export() method
+     *
      * Returns any blacklisted tokens that will have expired naturally and so no longer need to be considered.
      *
      * @return array
@@ -130,7 +145,7 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
     }
 
     /**
-     * Deletes any blacklisted tokens that will have expired naturally and so no longer need to be considered.
+     * Delete all blacklisted token entities where the associated token has naturally expired, and so no longer needs to be tracked
      */
     public function deleteAllExpired()
     {
@@ -140,5 +155,61 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
         {
             $this->delete($expiredBlacklistedToken['id']);
         }
+    }
+
+    /**
+     * Converts results into a common array format
+     *
+     * TODO: Replace with improved version when ready.
+     *
+     * @param $resultSet
+     * @return array
+     * @throws InvalidArgumentTypeException
+     */
+    protected function export($resultSet)
+    {
+        if (is_object($resultSet))
+        {
+            // Exporting depends on what needs exporting (i.e. what class are we exporting)
+            switch (get_class($resultSet)) {
+                case 'Illuminate\Database\Eloquent\Collection':
+
+                    return $this->exportEloquentCollection($resultSet);
+                    break;
+
+                case 'BlacklistedToken':
+
+                    return $this->exportBlacklistedToken($resultSet);
+                    break;
+            }
+        }
+
+        if (is_array($resultSet))
+        {
+            // Arrays are already in the right format but need to be wrapped in a data key
+
+            return [
+                'data' => $resultSet
+            ];
+        }
+
+        throw new InvalidArgumentTypeException(
+            $argumentName = 'repository_export',
+            $valueOfCorrectArgumentType = [],
+            $argumentValue = $resultSet
+        );
+    }
+
+    /**
+     * Export a Blacklisted Token
+     *
+     * @param BlacklistedToken $resultSet
+     * @return array
+     */
+    protected function exportBlacklistedToken(BlacklistedToken $resultSet)
+    {
+        return [
+            'data' => $resultSet->toArray()
+        ];
     }
 }
