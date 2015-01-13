@@ -3,6 +3,7 @@
 namespace Antarctica\LaravelTokenBlacklist\Repository;
 
 use Antarctica\LaravelBaseRepositories\Repository\BaseRepositoryEloquent;
+use Antarctica\LaravelBaseExceptions\Exception\InvalidArgumentTypeException;
 
 use BlacklistedToken;
 
@@ -71,10 +72,11 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
             // In this case we *want* this exception to the thrown, but to ignore its usual significance and carry on.
         }
 
-            // Call to standard (parent) create method
-            parent::create($blacklistedToken);
         try
         {
+            $result = $this->model->create($blacklistedToken);
+
+            return $this->export($result);
         }
         catch (QueryException $exception)
         {
@@ -156,5 +158,61 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
         {
             $this->delete($expiredBlacklistedToken['id']);
         }
+    }
+
+    /**
+     * Converts results into a common array format
+     *
+     * TODO: Replace with improved version when ready.
+     *
+     * @param $resultSet
+     * @return array
+     * @throws InvalidArgumentTypeException
+     */
+    protected function export($resultSet)
+    {
+        if (is_object($resultSet))
+        {
+            // Exporting depends on what needs exporting (i.e. what class are we exporting)
+            switch (get_class($resultSet)) {
+                case 'Illuminate\Database\Eloquent\Collection':
+
+                    return $this->exportEloquentCollection($resultSet);
+                    break;
+
+                case 'BlacklistedToken':
+
+                    return $this->exportBlacklistedToken($resultSet);
+                    break;
+            }
+        }
+
+        if (is_array($resultSet))
+        {
+            // Arrays are already in the right format but need to be wrapped in a data key
+
+            return [
+                'data' => $resultSet
+            ];
+        }
+
+        throw new InvalidArgumentTypeException(
+            $argumentName = 'repository_export',
+            $valueOfCorrectArgumentType = [],
+            $argumentValue = $resultSet
+        );
+    }
+
+    /**
+     * Export a Blacklisted Token
+     *
+     * @param BlacklistedToken $resultSet
+     * @return array
+     */
+    protected function exportBlacklistedToken(BlacklistedToken $resultSet)
+    {
+        return [
+            'data' => $resultSet->toArray()
+        ];
     }
 }
