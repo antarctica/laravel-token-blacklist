@@ -53,7 +53,8 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
             'expiry' => Carbon::createFromTimeStamp($this->Token->getExpiry($token))
         ];
 
-        try {
+        try
+        {
             // This will raise an expired token exception if the token has expired (no point blacklisting something that won't work anyway)
             $this->Token->getExpiry($token);
 
@@ -70,10 +71,13 @@ class TokenBlacklistRepositoryEloquent extends BaseRepositoryEloquent implements
             // In this case we *want* this exception to the thrown, but to ignore its usual significance and carry on.
         }
 
-        try {
             // Call to standard (parent) create method
             parent::create($blacklistedToken);
-        } catch (QueryException $exception) {
+        try
+        {
+        }
+        catch (QueryException $exception)
+        {
             throw new BlacklistFault('Unable to blacklist token.');
         }
 
